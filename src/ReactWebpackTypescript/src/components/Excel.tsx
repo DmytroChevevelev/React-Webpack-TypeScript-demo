@@ -14,10 +14,13 @@ export interface ExcelState {
     edit: {
         row: number,
         cell: number
-    }
+    },
+    search: string[]
 };
 
 export class Excel extends React.Component<ExcelProps, ExcelState> {
+
+    _preSearchData: string[][] = null;
 
     constructor(props: ExcelProps) {
         // set props
@@ -27,12 +30,14 @@ export class Excel extends React.Component<ExcelProps, ExcelState> {
             data: props.initialData,
             sortBy: null,
             descending: false,
-            edit: null
+            edit: null,
+            search: null
         };
         // bind this on events
         this._sort = this._sort.bind(this);
         this._save = this._save.bind(this);
-        this._showEditor = this._showEditor.bind(this);
+        this._toggleSearch = this._toggleSearch.bind(this);
+        this._search = this._search.bind(this);
     }
 
     // sort by column
@@ -66,6 +71,100 @@ export class Excel extends React.Component<ExcelProps, ExcelState> {
         });
     }
 
+    _save(e: React.SyntheticEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const currentState = this.state;
+        let data = currentState.data.slice();
+        let input = e.currentTarget.elements[0] as HTMLInputElement;
+        data[currentState.edit.row][currentState.edit.cell] = input.value;
+
+        this.setState({
+            data: data,
+            edit: null
+        });
+    }
+
+    _toggleSearch() {
+        if (this.state.search) {
+            this.setState({
+                data: this._preSearchData,
+                search: null
+            });
+        }
+        else {
+            this._preSearchData = this.state.data;
+            this.setState({
+                search: new Array<string>(this.props.headers.length)
+            });
+        }
+    }
+
+    _download(type: string, e: any) {
+        let content = type == "json"
+            ? JSON.stringify(this.state.data)
+            : this.state.data.reduce(function (result, row) {
+                return result +
+                    row.reduce(function (rowResult, cell, idx) {
+                        return rowResult + "'" + cell.replace(/"/g, '""') + "'" + (idx < row.length ? "," : "");
+                }, "") + "\n";
+            }, "");
+
+        let URL = window.URL;
+        let blob = new Blob([content], {
+            type: 'text/' + type
+        });
+        e.target.href = URL.createObjectURL(blob);
+        e.target.download = 'data.' + type;
+    }
+
+    _search(e: React.SyntheticEvent<HTMLTableDataCellElement>) {
+        let input = e.target as HTMLInputElement;
+        let idx = parseInt(input.dataset.idx);
+
+        let search = this.state.search;
+        search[idx] = input.value.toLowerCase();
+
+        let searchData = this._preSearchData.filter((row) => {
+            let result = true;
+
+            this.state.search.map((_, idx) => {
+                if (row[idx].toString() !== "") {
+                    result = result && row[idx].toString().toLowerCase().indexOf(search[idx]) > -1;
+                }
+            });
+
+            return result;
+        });
+
+        this.setState({
+            data: searchData
+        });
+
+
+        this.setState({
+            search: search
+        });
+    }
+
+    renderSearch() {
+        if (!this.state.search) {
+            return null;
+        }
+
+        return (
+            <tr>
+                {this.props.headers.map((_: string, idx: number) => {
+                    return (
+                        <td key={idx} onChange={this._search}>
+                            <input type="text" data-idx={idx} />
+                        </td>
+                    );
+                })}
+            </tr>
+        );
+    }
+
     renderTableHeader() {
         return (
             <thead onClick={this._sort}>
@@ -74,26 +173,13 @@ export class Excel extends React.Component<ExcelProps, ExcelState> {
                         this.props.headers.map((title: string, idx: number) => {
                             return this.state.sortBy == idx
                                 ? <th key={idx}>{title} {this.state.descending ? '\u2191' : '\u2193'}</th>
-                                : <th key={idx}>{title}</th>;
+                                : <th key={idx}>{title} &nbsp;</th>;
                         })
                     }
                 </tr>
+                {this.renderSearch()}
             </thead>
         );
-    }
-
-    _save(e: React.SyntheticEvent<HTMLFormElement>) {
-        e.preventDefault();
-
-        const currentState = this.state;
-        var data = currentState.data.slice();
-        let input = e.currentTarget.elements[0] as HTMLInputElement;
-        data[currentState.edit.row][currentState.edit.cell] = input.value;
-
-        this.setState({
-            data: data,
-            edit: null
-        });
     }
 
     renderTableBody() {
@@ -131,9 +217,14 @@ export class Excel extends React.Component<ExcelProps, ExcelState> {
 
     render() {
         return (
-            <table>
-                {this.renderTableHeader()}
-                {this.renderTableBody()}
-            </table>);
+            <div>
+                <button onClick={this._toggleSearch}>Search</button>
+                <a href="data.json" onClick={this._download.bind(this, "json")}>Export json </a>
+                <a href="data.csv" onClick={this._download.bind(this, "csv")}>Export csv</a>
+                <table>
+                    {this.renderTableHeader()}
+                    {this.renderTableBody()}
+                </table>
+            </div>);
     }
 }
