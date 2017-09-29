@@ -157,7 +157,7 @@ export class Excel extends React.Component<ExcelProps, ExcelState> {
                 {this.props.headers.map((_: string, idx: number) => {
                     return (
                         <td key={idx} onChange={this._search}>
-                            <input type="text" data-idx={idx} />
+                            <input className="form-control mr-sm-2" type="text" data-idx={idx} />
                         </td>
                     );
                 })}
@@ -198,7 +198,7 @@ export class Excel extends React.Component<ExcelProps, ExcelState> {
                                             return (
                                                 <td key={cellIdx}>
                                                     <form onSubmit={this._save}>
-                                                        <input defaultValue={content} type="text" />
+                                                        <input className="form-control mr-sm-2" defaultValue={content} type="text" />
                                                     </form>
                                                 </td>
                                                 );
@@ -217,14 +217,20 @@ export class Excel extends React.Component<ExcelProps, ExcelState> {
 
     render() {
         return (
-            <div>
-                <button onClick={this._toggleSearch}>Search</button>
-                <a href="data.json" onClick={this._download.bind(this, "json")}>Export json </a>
-                <a href="data.csv" onClick={this._download.bind(this, "csv")}>Export csv</a>
-                <table>
-                    {this.renderTableHeader()}
-                    {this.renderTableBody()}
-                </table>
+            <div className="container-fluid">
+                <main className="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+                    <h1>Improvised Excel</h1>
+                    <button className="btn btn-primary" onClick={this._toggleSearch}>Search</button>
+                    <table className="table table-striped">
+                        {this.renderTableHeader()}
+                        {this.renderTableBody()}
+                    </table>
+                    <div>
+                        <a className="btn btn-secondary" href="data.json" onClick={this._download.bind(this, "json")}>Export json</a>
+                        {" "}
+                        <a className="btn btn-secondary" href="data.csv" onClick={this._download.bind(this, "csv")}>Export csv</a>
+                    </div>
+                </main>
             </div>);
     }
 }
