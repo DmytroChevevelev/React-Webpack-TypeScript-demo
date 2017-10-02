@@ -217,20 +217,18 @@ export class Excel extends React.Component<ExcelProps, ExcelState> {
 
     render() {
         return (
-            <div className="container-fluid">
-                <main className="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-                    <h1>Improvised Excel</h1>
-                    <button className="btn btn-primary" onClick={this._toggleSearch}>Search</button>
-                    <table className="table table-striped">
-                        {this.renderTableHeader()}
-                        {this.renderTableBody()}
-                    </table>
-                    <div>
-                        <a className="btn btn-secondary" href="data.json" onClick={this._download.bind(this, "json")}>Export json</a>
-                        {" "}
-                        <a className="btn btn-secondary" href="data.csv" onClick={this._download.bind(this, "csv")}>Export csv</a>
-                    </div>
-                </main>
+            <div>
+                <h1>Improvised Excel</h1>
+                <button className="btn btn-primary" onClick={this._toggleSearch}>Search</button>
+                <table className="table table-striped">
+                    {this.renderTableHeader()}
+                    {this.renderTableBody()}
+                </table>
+                <div>
+                    <a className="btn btn-secondary" href="data.json" onClick={this._download.bind(this, "json")}>Export json</a>
+                    {" "}
+                    <a className="btn btn-secondary" href="data.csv" onClick={this._download.bind(this, "csv")}>Export csv</a>
+                </div>
             </div>);
     }
 }

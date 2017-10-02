@@ -1,9 +1,12 @@
 ﻿import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { Switch, Route } from 'react-router-dom';
 
+import { Home } from "./Home";
 import { Excel } from "./Excel";
 import { Header } from "./Header";
+import { Friends } from './Friends';
 
+// todo move to backend
 var headers = ["Book", "Author", "Language", "Published", "Sales"];
 var data = [
     ["The Lord of the Rings", "J. R. R. Tolkien", "English", "1954–1955", "150 million"],
@@ -20,7 +23,20 @@ export class App extends React.Component<null, null> {
         return (
             <div className="container">
                 <Header />
-                <Excel headers = { headers } initialData= { data } />
+                <div className="container-fluid">
+                    <main className="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+                        <Switch>
+                            // HOME PAGE
+                            <Route exact path="/" component={Home} />
+                            // EXCEL
+                            <Route exact path="/excel" render={
+                                () => <Excel headers={headers} initialData={data} />
+                            } />
+                            // FRIENDS
+                            <Route exact path="/friends" component={Friends} />
+                        </Switch>
+                    </main>
+                </div>
             </div>
         );
     }
