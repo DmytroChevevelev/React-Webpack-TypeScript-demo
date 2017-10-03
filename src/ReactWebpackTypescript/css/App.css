@@ -1,0 +1,225 @@
+﻿.ms-rso-header {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    overflow: hidden;
+    margin-top: 0px !important;
+}
+
+.ms-rso-header .title {
+    color: white;
+    border: 0;
+    background-color: transparent;
+    font-family: 'Segoe UI';
+    font-size: 19px;
+    display: inline;
+    padding-left: 50px;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+    display: inline;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.ms-rso-footer .msft-logo {
+    z-index: 10;
+    max-width: 285px;
+    max-height: 105px;
+    padding-left: 50px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.ms-rso-signin-box {
+    /*display:none;*/
+    padding-left: 50px;
+}
+
+.ms-rso-signin-box-content {
+    width: 550px;
+    height: 60px;
+    border: 1px solid #F0F0F0;
+}
+
+.ms-rso-signin-button {
+    margin: 15px;
+    float: right;
+}
+
+.ms-rso-signin-span {
+    margin: 19px;
+    display: inline-block;
+}
+
+.ms-rso-page .btn {
+    color: #000;
+    font-family: 'Segoe UI';
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #ababab;
+    border-radius: 0;
+    min-width: 130px;
+    background: white;
+    outline-color: initial;
+}
+
+input[type="button"], input[type="submit"] {
+    font-family: 'Segoe UI';
+    font-weight: lighter;
+    font-size: 15px;
+    border: 1px solid RGB(240,240,240);
+    background-color: white;
+    color: black;   
+    height: 30px;
+}
+
+.ms-dse-container {
+    width: 100%;
+}
+
+.text-head {
+    color: rgb(2, 34, 79);
+    font-family: 'Segoe UI';
+    font-weight: lighter;
+    font-size: 23px;
+    padding-bottom: 42px;
+}
+
+.text-common {
+    color: black;
+    font-family: 'Segoe UI';
+    font-size: 16px;
+}
+
+div.ms-dse-toolbar > * {
+    display: inline-block;
+    margin: auto 2px;
+    background: transparent;
+    border: 1px solid rgb(191, 191, 191);
+    padding: 4px;
+    font-family: 'Segoe UI';
+    font-size: 16px;
+}
+
+div.ms-dse-toolbar > input {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.ms-dse-toolbar > input[type="button"] {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+div.ms-dse-toolbar > label,
+div.ms-dse-toolbar > span,
+div.ms-dse-toolbar > ul {
+    padding: 5px;
+    border: none;
+}
+
+.ms-dse-toolbar-item-ra {
+    float: right;
+}
+
+
+.ms-rso-header .login, .ms-rso-header .sign-menu div {
+    float: right;
+    display: inline;
+    background-color: #F0F0F0;
+    height: 50px;
+    width: 150px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.ms-rso-header .login .loginUser, .ms-rso-header .sign-menu div {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: RGB(0,0,0);
+    font-family: 'Segoe UI';
+    font-size: 16px;
+}
+
+.ms-are-info-display {
+    opacity: 1;
+    background-color: yellow;
+    margin-top: 10px;
+    width: 75%;
+    margin: auto;
+    text-align: left;
+    transition: opacity 0ms 500ms;
+}
+
+.ms-are-info-body {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.ms-are-info-body > div {
+display: inline-block;
+}
+
+.ms-are-info-body .ms-are-info-body-href {
+display: none;
+font-size: 12px;
+vertical-align: middle;
+}
+
+.ms-are-info-body .ms-are-info-body-href a {
+    color: #ffffff;
+    font-size: 16px;
+    font-family: 'Segoe UI';
+}
+
+.ms-are-info-create-title {
+    font-family: 'Segoe UI';
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    color: #ffffff;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 2px;
+}
+
+.ms-are-info-group {
+    position: relative;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.ms-dse-uiblocker {
+    background-color: rgba(191,191,191,0.7);
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.center {
+    left: 50%;
+    margin-right: -50%;
+    position: absolute;
+}
+
+.ms-rso-footer {
+    position: absolute;
+    bottom: 0;
+}

@@ -2,6 +2,7 @@
 import * as ReactDOM from "react-dom";
 
 import { Excel } from "./components/Excel";
+import { App } from './components/App';
 
 var headers = ["Book", "Author", "Language", "Published", "Sales"];
 var data = [
@@ -15,6 +16,6 @@ var data = [
 ];
 
 ReactDOM.render(
-    <Excel headers={headers} initialData={data} />,
+    <App />,
     document.getElementById("app")
 );

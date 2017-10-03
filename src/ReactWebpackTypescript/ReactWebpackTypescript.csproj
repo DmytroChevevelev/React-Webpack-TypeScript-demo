@@ -8,8 +8,13 @@
     <PackageId>ReactWebpackTypescript</PackageId>
     <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
-    <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="css\App.css" />
+    <Content Include="Img\Microsoft-logo_rgb_c-gray.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="wwwroot\**\*">
@@ -26,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="dist\" />
+    <Folder Include="Img\" />
     <Folder Include="wwwroot\bundle\" />
   </ItemGroup>
 

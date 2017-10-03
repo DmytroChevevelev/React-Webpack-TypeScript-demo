@@ -1,0 +1,3 @@
+﻿module.exports = {
+    AuthenticationContext: function()
+};

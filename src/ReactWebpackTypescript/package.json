@@ -2,18 +2,60 @@
   "name": "myproject",
   "version": "1.0.0",
   "dependencies": {
+    "@types/adal": "^1.0.15",
+    "@types/jquery": "^3.2.12",
+    "@types/node": "^8.x",
     "@types/react": "^16.0.1",
     "@types/react-dom": "^15.5.2",
+    "adal-angular": "^1.0.15",
+    "css-loader": "^0.28.7",
+    "expose-loader": "^0.7.3",
+    "jquery": "^3.2.1",
+    "querystring-browser": "^1.0.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-redux": "^5.0.6"
+    "react-redux": "^5.0.6",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9"
   },
   "devDependencies": {
+    "@types/jest": "^21.1.1",
+    "@types/react-test-renderer": "*",
+    "@types/enzyme": "^2.8.9",
+    "enzyme": "*",
+    "enzyme-adapter-react-16": "*",
+    "jest": "^21.2.1",
+    "react-test-renderer": "^16.0.0",
+    "ts-jest": "^21.0.1",
     "webpack": "^3.5.1",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^2.7.1",
+    "identity-obj-proxy": "^3.0.0"
   },
   "scripts": {
     "start": "webpack-dev-server --env development",
-    "build": "webpack --env production"
+    "build": "webpack --env production",
+    "test": "jest"
+  },
+  "jest": {
+    "automock": false,
+    "transform": {
+      "^.+\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(dist/*/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|js?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy",
+      "\\.(adal.js)$": "./__mocks__/adalMock.js"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [ "dist/components/*.{js,jsx}", "!dist/components/__tests__*.{js,jsx}" ],
+    "coverageDirectory": "__coverage__"
   }
 }
